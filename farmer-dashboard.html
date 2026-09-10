@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmer Dashboard | AnajTrack</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f3f8f4;color:#173b27;min-height:100vh
+}
+header{
+  background:#07572f;color:#fff;min-height:82px;padding:9px 4%;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 3px 15px rgba(0,0,0,.14)
+}
+.header-left{display:flex;align-items:center;gap:14px}
+.gehu{
+  width:62px;height:62px;object-fit:contain;border-radius:10px;
+  background:#fff;padding:4px
+}
+.brand{font-size:30px;font-weight:800;letter-spacing:-1px}
+.brand span{color:#f0a33b}
+.logout{
+  color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.35);
+  padding:9px 14px;border-radius:8px;font-weight:700
+}
+.logout:hover{background:#fff;color:#07572f}
+
+main{width:min(1120px,94%);margin:25px auto 50px}
+.hero{
+  width:100%;aspect-ratio:16/9;max-height:390px;
+  border-radius:18px;overflow:hidden;box-shadow:0 8px 25px rgba(20,65,38,.12);
+  background:#dfeee1;margin-bottom:28px
+}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+
+.welcome{text-align:center;margin-bottom:25px}
+.welcome h1{font-size:32px;color:#145c34}
+.welcome p{margin-top:7px;color:#68776e}
+
+.card{
+  background:#fff;border:1px solid #d7e5d9;border-radius:18px;
+  padding:25px;box-shadow:0 8px 25px rgba(20,65,38,.09);margin-bottom:23px
+}
+.card-title{
+  color:#145c34;font-size:21px;font-weight:800;margin-bottom:19px;
+  padding-bottom:11px;border-bottom:2px solid #e3eee5
+}
+
+.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.info{
+  background:#f6faf7;border:1px solid #e0eae2;border-radius:11px;
+  padding:14px
+}
+.info label{display:block;font-size:12px;color:#708078;margin-bottom:5px}
+.info strong{font-size:15px;color:#234a31}
+
+.slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.slot{
+  background:#f7fbf8;border:1px solid #dbe8de;border-radius:12px;
+  padding:17px;text-align:center
+}
+.slot .big{font-size:27px;font-weight:800;color:#08763e;margin-bottom:5px}
+.slot span{font-size:12px;color:#68776e}
+.slot strong{display:block;margin-top:4px}
+
+.crop-heading{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:15px;margin-bottom:17px
+}
+.crop-heading .card-title{margin:0;flex:1}
+.crop-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:17px
+}
+.crop{
+  position:relative;overflow:hidden;border:2px solid transparent;
+  border-radius:14px;background:#f8fbf8;cursor:pointer;
+  transition:.2s;box-shadow:0 3px 12px rgba(0,0,0,.06)
+}
+.crop:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.1)}
+.crop.selected{border-color:#08763e;background:#eef9f1}
+.crop img{
+  display:block;width:100%;aspect-ratio:1/1;object-fit:cover
+}
+.crop-name{
+  padding:11px;text-align:center;font-weight:800;color:#234a31
+}
+.check{
+  position:absolute;right:9px;top:9px;width:27px;height:27px;
+  border-radius:50%;background:#08763e;color:white;display:none;
+  place-items:center;font-weight:900
+}
+.crop.selected .check{display:grid}
+
+.actions{text-align:center;margin-top:21px}
+.selected-crop{
+  font-size:14px;color:#52655a;margin-bottom:11px;min-height:20px
+}
+.continue{
+  border:0;border-radius:10px;background:#08763e;color:#fff;
+  padding:13px 35px;font-size:15px;font-weight:800;cursor:pointer
+}
+.continue:hover{background:#075b30}
+
+.note{
+  background:#fff8e8;border:1px solid #f0dfb8;color:#6d5729;
+  padding:13px 15px;border-radius:10px;font-size:12px;line-height:1.5
+}
+footer{
+  background:#063e23;color:#dcebe1;text-align:center;
+  padding:20px;font-size:13px;line-height:1.6
+}
+@media(max-width:760px){
+  .profile-grid,.slot-grid{grid-template-columns:1fr}
+  .crop-grid{grid-template-columns:repeat(2,1fr)}
+  .brand{font-size:25px}.gehu{width:52px;height:52px}
+  main{width:92%}.card{padding:19px}
+}
+@media(max-width:400px){
+  .crop-grid{gap:10px}.crop-name{font-size:13px;padding:9px}
+  .logout{font-size:12px;padding:8px 10px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-left">
+    <!-- gehu.png: top-left -->
+    <img class="gehu" src="gehu.png" alt="Wheat">
+    <div class="brand">Anaj<span>Track</span></div>
+  </div>
+  <a class="logout" href="farmer-login.html">Logout</a>
+</header>
+
+<main>
+
+  <!-- farmer.png: 16:9 banner at top/middle -->
+  <div class="hero">
+    <img src="farmer.png" alt="Farmer">
+  </div>
+
+  <div class="welcome">
+    <h1>Farmer Dashboard</h1>
+    <p>Manage your profile, procurement slot and crop details.</p>
+  </div>
+
+  <!-- YOUR PROFILE -->
+  <section class="card">
+    <div class="card-title">👨‍🌾 Your Profile</div>
+    <div class="profile-grid">
+      <div class="info">
+        <label>Farmer Name</label>
+        <strong>Registered Farmer</strong>
+      </div>
+      <div class="info">
+        <label>Farmer ID</label>
+        <strong>ANJ-FR-000001</strong>
+      </div>
+      <div class="info">
+        <label>Mobile Number</label>
+        <strong>+91 XXXXX XXXXX</strong>
+      </div>
+      <div class="info">
+        <label>State</label>
+        <strong>Not connected</strong>
+      </div>
+      <div class="info">
+        <label>District</label>
+        <strong>Not connected</strong>
+      </div>
+      <div class="info">
+        <label>Gram Panchayat</label>
+        <strong>Not connected</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLOT ID -->
+  <section class="card">
+    <div class="card-title">🎟️ Your Procurement Slot</div>
+    <div class="slot-grid">
+      <div class="slot">
+        <div class="big">AT-0001</div>
+        <span>Slot ID / Token Number</span>
+      </div>
+      <div class="slot">
+        <div class="big">12/09/2026</div>
+        <span>Procurement Date</span>
+      </div>
+      <div class="slot">
+        <div class="big">10:30 AM</div>
+        <span>Reporting Time</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CROP SELECT -->
+  <section class="card">
+    <div class="crop-heading">
+      <div class="card-title">🌾 Select Type of Crop</div>
+    </div>
+
+    <div class="crop-grid">
+
+      <div class="crop" data-crop="Wheat" onclick="selectCrop(this)">
+        <img src="crop1.png" alt="Wheat crop">
+        <div class="check">✓</div>
+        <div class="crop-name">Wheat</div>
+      </div>
+
+      <div class="crop" data-crop="Rice" onclick="selectCrop(this)">
+        <img src="crop2.png" alt="Rice crop">
+        <div class="check">✓</div>
+        <div class="crop-name">Rice</div>
+      </div>
+
+      <div class="crop" data-crop="Maize" onclick="selectCrop(this)">
+        <img src="crop3.png" alt="Maize crop">
+        <div class="check">✓</div>
+        <div class="crop-name">Maize</div>
+      </div>
+
+      <div class="crop" data-crop="Pulses" onclick="selectCrop(this)">
+        <img src="crop4.png" alt="Pulses crop">
+        <div class="check">✓</div>
+        <div class="crop-name">Pulses</div>
+      </div>
+
+      <div class="crop" data-crop="Mustard" onclick="selectCrop(this)">
+        <img src="crop5.png" alt="Mustard crop">
+        <div class="check">✓</div>
+        <div class="crop-name">Mustard</div>
+      </div>
+
+      <div class="crop" data-crop="Potato" onclick="selectCrop(this)">
+        <img src="crop6.png" alt="Potato crop">
+        <div class="check">✓</div>
+        <div class="crop-name">Potato</div>
+      </div>
+
+    </div>
+
+    <div class="actions">
+      <div class="selected-crop" id="selectedCrop">No crop selected</div>
+      <button class="continue" type="button" onclick="continueDashboard()">Continue</button>
+    </div>
+  </section>
+
+  <div class="note">
+    <strong>Note:</strong> The profile and slot values shown above are demo values for the SIH frontend. They will be populated from the secure backend after farmer authentication and slot booking are connected.
+  </div>
+
+</main>
+
+<footer>
+  <strong>AnajTrack</strong> · Smart Agricultural Procurement Platform · © 2026
+</footer>
+
+<script>
+let selectedCrop = "";
+
+function selectCrop(element){
+  document.querySelectorAll(".crop").forEach(c => c.classList.remove("selected"));
+  element.classList.add("selected");
+  selectedCrop = element.dataset.crop;
+  document.getElementById("selectedCrop").textContent =
+    "Selected Crop: " + selectedCrop;
+}
+
+function continueDashboard(){
+  if(!selectedCrop){
+    document.getElementById("selectedCrop").textContent =
+      "Please select a crop first.";
+    return;
+  }
+
+  alert("Selected crop: " + selectedCrop +
+        "\\nBackend connection will save this selection.");
+}
+</script>
+
+</body>
+</html>
