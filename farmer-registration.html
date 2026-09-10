@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmer Registration | AnajTrack</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#eef8f0,#f8fbf7);
+    color:#173b27;
+    min-height:100vh;
+  }
+  header{
+    background:#07572f;color:#fff;padding:16px 5%;
+    display:flex;align-items:center;justify-content:space-between;
+    box-shadow:0 3px 14px rgba(0,0,0,.15)
+  }
+  .brand{font-size:30px;font-weight:800;letter-spacing:-1px}
+  .brand span{color:#f0a33b}
+  .back{
+    color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.35);
+    padding:9px 15px;border-radius:8px;font-weight:600
+  }
+  .back:hover{background:#fff;color:#07572f}
+  main{width:min(1050px,92%);margin:35px auto 50px}
+  .heading{text-align:center;margin-bottom:25px}
+  .heading h1{font-size:34px;color:#145c34}
+  .heading p{margin-top:7px;color:#66776c}
+  .card{
+    background:#fff;border-radius:18px;padding:30px;
+    box-shadow:0 10px 35px rgba(20,65,38,.12);
+    border:1px solid #d7e5d9
+  }
+  .section-title{
+    font-size:19px;color:#145c34;margin:0 0 18px;
+    padding-bottom:9px;border-bottom:2px solid #e3eee5
+  }
+  .grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px
+  }
+  .field{display:flex;flex-direction:column;gap:7px}
+  label{font-weight:700;font-size:14px;color:#274a35}
+  input,select{
+    width:100%;padding:13px 14px;border:1px solid #cbd9ce;
+    border-radius:9px;background:#fff;color:#243b2c;font-size:15px;
+    outline:none;transition:.2s
+  }
+  input:focus,select:focus{
+    border-color:#16834a;box-shadow:0 0 0 3px rgba(22,131,74,.10)
+  }
+  select:disabled{background:#f1f4f2;color:#87928b;cursor:not-allowed}
+  .full{grid-column:1/-1}
+  .hint{font-size:12px;color:#738078}
+  .actions{
+    margin-top:25px;padding-top:20px;border-top:1px solid #e2eae4;
+    display:flex;justify-content:center
+  }
+  button{
+    border:0;border-radius:10px;padding:14px 42px;
+    background:#08763e;color:white;font-size:16px;font-weight:800;
+    cursor:pointer;box-shadow:0 5px 15px rgba(8,118,62,.22)
+  }
+  button:hover{background:#075b30;transform:translateY(-1px)}
+  .privacy{
+    margin-top:18px;background:#fff8e8;border:1px solid #f0dfb8;
+    color:#6d5729;padding:13px 15px;border-radius:10px;font-size:12px;line-height:1.5
+  }
+  .status{margin-top:15px;text-align:center;font-weight:700;display:none}
+  footer{text-align:center;background:#063e23;color:#dcebe1;padding:20px;font-size:13px}
+  @media(max-width:700px){
+    .grid{grid-template-columns:1fr}
+    .full{grid-column:auto}
+    .card{padding:20px}
+    .brand{font-size:25px}
+    .heading h1{font-size:28px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Anaj<span>Track</span></div>
+  <a class="back" href="index.html">← Back to Home</a>
+</header>
+
+<main>
+  <div class="heading">
+    <h1>Farmer Registration</h1>
+    <p>Register once to book procurement slots and track your procurement & payment status.</p>
+  </div>
+
+  <div class="card">
+    <form id="farmerForm" novalidate>
+
+      <div class="section-title">👨‍🌾 Personal Information</div>
+      <div class="grid">
+        <div class="field full">
+          <label for="fullName">Full Name *</label>
+          <input id="fullName" name="fullName" type="text"
+                 placeholder="Enter farmer's full name" maxlength="80" required>
+        </div>
+
+        <div class="field">
+          <label for="dob">Date of Birth *</label>
+          <input id="dob" name="dob" type="date" required>
+        </div>
+
+        <div class="field">
+          <label for="aadhaar">Aadhaar Number *</label>
+          <input id="aadhaar" name="aadhaar" type="text" inputmode="numeric"
+                 maxlength="12" minlength="12" pattern="[0-9]{12}"
+                 placeholder="Enter 12-digit Aadhaar number" required>
+          <span class="hint">Demo field: do not enter a real Aadhaar number during testing.</span>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="section-title">📍 Address / Location</div>
+      <div style="margin:-7px 0 15px;color:#68776d;font-size:12px;">
+        Location data is loaded dynamically from the Government of India LGD directory.
+      </div>
+      <div class="grid">
+
+        <div class="field">
+          <label for="state">State / Union Territory *</label>
+          <select id="state" name="state" required>
+            <option value="">Select State / UT</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="district">District *</label>
+          <select id="district" name="district" required disabled>
+            <option value="">Select State first</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="block">Block *</label>
+          <select id="block" name="block" required disabled>
+            <option value="">Select District first</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="panchayat">Gram Panchayat *</label>
+          <select id="panchayat" name="panchayat" required disabled>
+            <option value="">Select Block first</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="privacy">
+        <strong>Privacy:</strong> For the SIH prototype, this page validates the Aadhaar field locally and does not send it to any server. In the production version, Aadhaar handling should follow UIDAI requirements and applicable data-protection/security rules.
+      </div>
+
+      <div class="actions">
+        <button type="submit">✓ Submit Registration</button>
+      </div>
+
+      <div id="status" class="status"></div>
+    </form>
+  </div>
+</main>
+
+<footer>
+  <strong>AnajTrack</strong> · Smart Agricultural Procurement Platform · © 2026
+</footer>
+
+<script>
+/*
+  ANAJTRACK - LIVE LOCATION MASTER
+  --------------------------------
+  The cascading location lists use the Government of India's
+  Local Government Directory (LGD) web services:
+
+  State → District → Development Block → Gram Panchayat
+
+  LGD is maintained by the Ministry of Panchayati Raj and is
+  the Government of India's standard directory for these
+  administrative entities.
+
+  Endpoints used:
+    stateList
+    districtList?stateCode=
+    blockList?districtCode=
+    getBlockwiseMappedGP?blockCode=
+
+  The public HTML contains NO API key.
+*/
+
+const LGD_BASE = "https://lgdirectory.gov.in/webservices/lgdws";
+
+const state = document.getElementById("state");
+const district = document.getElementById("district");
+const block = document.getElementById("block");
+const panchayat = document.getElementById("panchayat");
+const form = document.getElementById("farmerForm");
+const statusBox = document.getElementById("status");
+
+function setStatus(message, color = "#315b40") {
+  statusBox.style.display = "block";
+  statusBox.style.color = color;
+  statusBox.textContent = message;
+}
+
+function resetSelect(selectEl, text) {
+  selectEl.innerHTML = "";
+  const option = document.createElement("option");
+  option.value = "";
+  option.textContent = text;
+  selectEl.appendChild(option);
+  selectEl.disabled = true;
+}
+
+function addOptions(selectEl, items, valueKey, textKey) {
+  resetSelect(selectEl, "Select " + (
+    selectEl === district ? "District" :
+    selectEl === block ? "Block" : "Gram Panchayat"
+  ));
+
+  const sorted = [...items].sort((a, b) =>
+    String(a[textKey] || "").localeCompare(String(b[textKey] || ""))
+  );
+
+  sorted.forEach(item => {
+    const option = document.createElement("option");
+    option.value = item[valueKey];
+    option.textContent = item[textKey];
+    selectEl.appendChild(option);
+  });
+
+  selectEl.disabled = sorted.length === 0;
+}
+
+async function lgdRequest(endpoint) {
+  /*
+    LGD services have historically been consumed using POST.
+    We use POST first and fall back to GET for deployments that
+    expose the service as GET.
+  */
+  let response;
+
+  try {
+    response = await fetch(`${LGD_BASE}/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: ""
+    });
+  } catch (postError) {
+    response = await fetch(`${LGD_BASE}/${endpoint}`, { method: "GET" });
+  }
+
+  if (!response.ok) {
+    throw new Error("LGD service returned HTTP " + response.status);
+  }
+
+  return await response.json();
+}
+
+function normalizeState(item) {
+  return {
+    code: item.stateCode,
+    name: item.stateNameEnglish
+  };
+}
+
+function normalizeDistrict(item) {
+  return {
+    code: item.districtCode,
+    name: item.districtNameEnglish
+  };
+}
+
+function normalizeBlock(item) {
+  return {
+    code: item.blockCode,
+    name: item.blockNameEnglish
+  };
+}
+
+function normalizePanchayat(item) {
+  return {
+    code: item.localBodyCode,
+    name: item.localBodyNameEnglish
+  };
+}
+
+async function loadStates() {
+  state.innerHTML = '<option value="">Loading States / UTs...</option>';
+  state.disabled = true;
+
+  try {
+    const data = await lgdRequest("stateList");
+
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error("No state data returned.");
+    }
+
+    data
+      .map(normalizeState)
+      .filter(x => x.code && x.name)
+      .sort((a,b) => a.name.localeCompare(b.name))
+      .forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.code;
+        option.textContent = item.name;
+        state.appendChild(option);
+      });
+
+    state.disabled = false;
+    setStatus("Official LGD location data loaded successfully.", "#08763e");
+  } catch (error) {
+    resetSelect(state, "Unable to load States / UTs");
+    setStatus(
+      "Could not load official LGD location data. If you opened this HTML directly from your computer, run it through a local web server (for example VS Code Live Server) and try again.",
+      "#9b5d00"
+    );
+    console.error("LGD stateList error:", error);
+  }
+}
+
+state.addEventListener("change", async () => {
+  resetSelect(district, "Loading Districts...");
+  resetSelect(block, "Select District first");
+  resetSelect(panchayat, "Select Block first");
+
+  if (!state.value) return;
+
+  try {
+    const data = await lgdRequest(`districtList?stateCode=${encodeURIComponent(state.value)}`);
+    const items = Array.isArray(data) ? data.map(normalizeDistrict)
+      .filter(x => x.code && x.name) : [];
+
+    addOptions(district, items, "code", "name");
+
+    if (!items.length) {
+      setStatus("No district records were returned for this State/UT.", "#9b5d00");
+    } else {
+      setStatus(`${items.length} district(s) loaded from LGD.`, "#08763e");
+    }
+  } catch (error) {
+    resetSelect(district, "Unable to load Districts");
+    setStatus("District data could not be loaded from LGD. Please try again.", "#b42318");
+    console.error("LGD districtList error:", error);
+  }
+});
+
+district.addEventListener("change", async () => {
+  resetSelect(block, "Loading Blocks...");
+  resetSelect(panchayat, "Select Block first");
+
+  if (!district.value) return;
+
+  try {
+    const data = await lgdRequest(`blockList?districtCode=${encodeURIComponent(district.value)}`);
+    const items = Array.isArray(data) ? data.map(normalizeBlock)
+      .filter(x => x.code && x.name) : [];
+
+    addOptions(block, items, "code", "name");
+
+    if (!items.length) {
+      setStatus("No development blocks were returned for this district.", "#9b5d00");
+    } else {
+      setStatus(`${items.length} development block(s) loaded from LGD.`, "#08763e");
+    }
+  } catch (error) {
+    resetSelect(block, "Unable to load Blocks");
+    setStatus("Block data could not be loaded from LGD. Please try again.", "#b42318");
+    console.error("LGD blockList error:", error);
+  }
+});
+
+block.addEventListener("change", async () => {
+  resetSelect(panchayat, "Loading Gram Panchayats...");
+
+  if (!block.value) return;
+
+  try {
+    const data = await lgdRequest(
+      `getBlockwiseMappedGP?blockCode=${encodeURIComponent(block.value)}`
+    );
+
+    const items = Array.isArray(data) ? data.map(normalizePanchayat)
+      .filter(x => x.code && x.name) : [];
+
+    addOptions(panchayat, items, "code", "name");
+
+    if (!items.length) {
+      setStatus("No Gram Panchayat records were returned for this block.", "#9b5d00");
+    } else {
+      setStatus(`${items.length} Gram Panchayat(s) loaded from LGD.`, "#08763e");
+    }
+  } catch (error) {
+    resetSelect(panchayat, "Unable to load Gram Panchayats");
+    setStatus("Panchayat data could not be loaded from LGD. Please try again.", "#b42318");
+    console.error("LGD Gram Panchayat error:", error);
+  }
+});
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  if (!state.value || !district.value || !block.value || !panchayat.value) {
+    setStatus("Please select State, District, Block and Gram Panchayat.", "#b42318");
+    return;
+  }
+
+  /*
+    Prototype only:
+    The data is validated in the browser. For real registration,
+    submit to your secure backend over HTTPS and never store
+    Aadhaar numbers in localStorage or plain client-side files.
+  */
+  setStatus(
+    "Registration details validated successfully. Connect your secure backend to complete registration.",
+    "#08763e"
+  );
+});
+
+loadStates();
+</script>
+</body>
+</html>
