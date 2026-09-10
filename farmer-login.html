@@ -144,7 +144,8 @@
         Forgot Farmer Registration Number?
       </a>
 
-      <button type="submit">🔐 Login</button>
+      <button type="button" onclick="openDashboard()">🔐 Login</button>
+      
       <div id="status"></div>
     </form>
 
@@ -164,38 +165,10 @@
 </footer>
 
 <script>
-const form = document.getElementById("loginForm");
-const statusBox = document.getElementById("status");
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  if (!form.checkValidity()) {
-    form.reportValidity();
-    return;
-  }
-
-  const phone = document.getElementById("phone").value.trim();
-
-  if (!/^[6-9][0-9]{9}$/.test(phone)) {
-    statusBox.style.display = "block";
-    statusBox.style.background = "#fff0f0";
-    statusBox.style.color = "#b42318";
-    statusBox.textContent = "Please enter a valid 10-digit Indian mobile number.";
-    return;
-  }
-
-  /*
-    Prototype only:
-    Authentication is not connected to a database yet.
-    Connect this form to your secure backend/API later.
-  */
-  statusBox.style.display = "block";
-  statusBox.style.background = "#eaf7ee";
-  statusBox.style.color = "#08763e";
-  statusBox.textContent =
-    "Login form validated. Connect the secure backend to authenticate the Farmer ID.";
-});
+function openDashboard() {
+  window.location.href = "farmer-dashboard.html";
+}
 </script>
 </body>
 </html>
+
