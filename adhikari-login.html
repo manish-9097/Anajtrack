@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government Adhikari Login | AnajTrack</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef8f0,#f8fbf7);
+    color:#173b27;
+    display:flex;
+    flex-direction:column;
+  }
+  header{
+    background:#07572f;color:#fff;padding:16px 5%;
+    display:flex;align-items:center;justify-content:space-between;
+    box-shadow:0 3px 14px rgba(0,0,0,.15)
+  }
+  .brand{font-size:30px;font-weight:800;letter-spacing:-1px}
+  .brand span{color:#f0a33b}
+  .back{
+    color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.35);
+    padding:9px 15px;border-radius:8px;font-weight:600
+  }
+  .back:hover{background:#fff;color:#07572f}
+  main{
+    width:min(500px,92%);margin:55px auto;flex:1;
+    display:flex;align-items:flex-start;justify-content:center
+  }
+  .login-card{
+    width:100%;background:#fff;border-radius:20px;padding:32px;
+    box-shadow:0 12px 40px rgba(20,65,38,.13);
+    border:1px solid #d7e5d9;border-top:5px solid #c77b1b
+  }
+  .icon{
+    width:76px;height:76px;border-radius:50%;margin:0 auto 14px;
+    display:grid;place-items:center;background:#fff3df;font-size:39px
+  }
+  .title{text-align:center}
+  .title h1{font-size:29px;color:#145c34}
+  .title p{margin-top:8px;color:#68776e;font-size:14px;line-height:1.5}
+  form{margin-top:27px}
+  .field{margin-bottom:18px}
+  label{
+    display:block;margin-bottom:7px;font-size:14px;
+    font-weight:700;color:#274a35
+  }
+  input{
+    width:100%;padding:14px;border:1px solid #cbd9ce;
+    border-radius:9px;font-size:15px;outline:none
+  }
+  input:focus{
+    border-color:#b86e13;box-shadow:0 0 0 3px rgba(184,110,19,.10)
+  }
+  .hint{display:block;margin-top:6px;color:#78847d;font-size:12px}
+  button{
+    width:100%;border:0;border-radius:10px;padding:14px;
+    background:#08763e;color:#fff;font-size:16px;font-weight:800;
+    cursor:pointer;box-shadow:0 5px 15px rgba(8,118,62,.22)
+  }
+  button:hover{background:#075b30}
+  #status{
+    display:none;margin-top:15px;padding:11px;border-radius:8px;
+    text-align:center;font-size:13px;font-weight:700
+  }
+  .security{
+    margin-top:22px;padding:12px 14px;border-radius:9px;
+    background:#f4f8f5;border:1px solid #dfe9e1;
+    color:#617067;font-size:12px;line-height:1.5;text-align:center
+  }
+  footer{
+    background:#063e23;color:#dcebe1;padding:20px;text-align:center;
+    font-size:13px;line-height:1.6
+  }
+  @media(max-width:500px){
+    header{padding:13px 4%}
+    .brand{font-size:25px}
+    .back{padding:8px 11px;font-size:13px}
+    main{margin:35px auto}
+    .login-card{padding:24px 19px}
+  }
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">Anaj<span>Track</span></div>
+  <a class="back" href="index.html">← Back to Home</a>
+</header>
+
+<main>
+  <section class="login-card">
+    <div class="icon">👨‍💼</div>
+
+    <div class="title">
+      <h1>Government Adhikari Login</h1>
+      <p>Authorized government officials can access the AnajTrack procurement dashboard.</p>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="adhikariId">Adhikari ID *</label>
+        <input
+          id="adhikariId"
+          name="adhikariId"
+          type="text"
+          placeholder="Enter your Adhikari ID"
+          autocomplete="username"
+          required
+        >
+        <span class="hint">Use the official ID provided by your department.</span>
+      </div>
+
+      <div class="field">
+        <label for="phone">Registered Mobile Number *</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          inputmode="numeric"
+          maxlength="10"
+          minlength="10"
+          pattern="[6-9][0-9]{9}"
+          placeholder="Enter 10-digit mobile number"
+          autocomplete="tel"
+          required
+        >
+      </div>
+
+      <button type="submit">🔐 Login</button>
+      <div id="status"></div>
+    </form>
+
+    <div class="security">
+      🔒 Government officer authentication should be connected to a secure HTTPS backend with role-based access control.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>AnajTrack</strong> · Smart Agricultural Procurement Platform · © 2026
+</footer>
+
+<script>
+const form = document.getElementById("loginForm");
+const statusBox = document.getElementById("status");
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  const phone = document.getElementById("phone").value.trim();
+
+  if (!/^[6-9][0-9]{9}$/.test(phone)) {
+    statusBox.style.display = "block";
+    statusBox.style.background = "#fff0f0";
+    statusBox.style.color = "#b42318";
+    statusBox.textContent = "Please enter a valid 10-digit Indian mobile number.";
+    return;
+  }
+
+  // Frontend prototype validation only.
+  statusBox.style.display = "block";
+  statusBox.style.background = "#eaf7ee";
+  statusBox.style.color = "#08763e";
+  statusBox.textContent =
+    "Login details validated. Connect the secure backend to authenticate the Adhikari ID.";
+});
+</script>
+</body>
+</html>
