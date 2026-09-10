@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnajTrack | Smart Procurement Portal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f8f3;
+      color: #173b27;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 3px solid #126b3a;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+
+    .topbar {
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 5%;
+      position: relative;
+    }
+
+    .satyamev {
+      width: 72px;
+      height: 88px;
+      object-fit: contain;
+      object-position: left center;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand h1 {
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1;
+      color: #126b3a;
+      letter-spacing: -1px;
+    }
+
+    .brand h1 span { color: #a45b16; }
+    .brand p {
+      margin-top: 7px;
+      color: #52655a;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .banner-wrap {
+      width: 100%;
+      background: #dcebdc;
+      overflow: hidden;
+    }
+
+    .banner {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: 430px;
+      object-fit: cover;
+    }
+
+    .main-nav {
+      background: #07572f;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 11px 4%;
+    }
+
+    .nav-btn {
+      color: white;
+      background: transparent;
+      text-decoration: none;
+      padding: 10px 17px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: #fff;
+      color: #07572f;
+      transform: translateY(-1px);
+    }
+
+    main {
+      width: min(1150px, 92%);
+      margin: 35px auto 50px;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .welcome h2 {
+      font-size: clamp(25px, 3vw, 36px);
+      color: #124c2e;
+    }
+
+    .welcome p {
+      margin-top: 8px;
+      color: #65766b;
+      font-size: 15px;
+    }
+
+    .dashboards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .dashboard {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 8px 28px rgba(20,65,38,.10);
+      border: 1px solid #d7e5d9;
+    }
+
+    .dashboard.farmer { border-top: 5px solid #198754; }
+    .dashboard.officer { border-top: 5px solid #d78a24; }
+
+    .dashboard-head {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .dashboard-icon {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 35px;
+      background: #e7f5eb;
+    }
+
+    .officer .dashboard-icon { background: #fff2df; }
+
+    .dashboard h3 {
+      font-size: 27px;
+      color: #174f31;
+    }
+
+    .dashboard-head p {
+      margin-top: 7px;
+      color: #68766e;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .option {
+      min-height: 150px;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 14px;
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid #d8e6da;
+      background: #f5fbf6;
+      transition: .2s ease;
+    }
+
+    .officer .option {
+      background: #fffaf2;
+      border-color: #f0dfc2;
+    }
+
+    .option:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 18px rgba(0,0,0,.10);
+    }
+
+    .option-icon {
+      font-size: 38px;
+      margin-bottom: 9px;
+    }
+
+    .option strong {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .option small {
+      color: #6b776f;
+      line-height: 1.35;
+    }
+
+    .notice {
+      margin-top: 25px;
+      background: #eaf5ed;
+      border: 1px solid #cde2d2;
+      border-radius: 12px;
+      padding: 15px 18px;
+      text-align: center;
+      color: #315b40;
+      font-size: 14px;
+    }
+
+    footer {
+      background: #063e23;
+      color: #e5f0e8;
+      padding: 22px 5%;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .topbar { padding: 8px 4%; min-height: 82px; }
+      .satyamev { width: 58px; height: 72px; }
+      .brand p { font-size: 12px; }
+      nav a { padding: 7px 10px; font-size: 13px; }
+      .dashboards { grid-template-columns: 1fr; }
+      main { margin-top: 25px; }
+    }
+
+    @media (max-width: 430px) {
+      .options { grid-template-columns: 1fr; }
+      .option { min-height: 125px; }
+      .dashboard { padding: 21px 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <!-- Keep satymevjayte.png in the same folder as this index.html -->
+      <img class="satyamev" src="satymevjayte.png" alt="Satyamev Jayate">
+      <div class="brand">
+        <h1>Anaj<span>Track</span></h1>
+        <p>Track. Procure. Get Paid.</p>
+      </div>
+    </div>
+
+    <!-- banner.png should be a 16:9 image and stay in the same folder -->
+    <div class="banner-wrap">
+      <img class="banner" src="banner.png" alt="AnajTrack agricultural procurement banner">
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-btn active" href="index.html">🏠 Home</a>
+      <a class="nav-btn" href="about.html">ℹ️ About</a>
+      <a class="nav-btn" href="procurement-centres.html">🏪 Procurement Centre</a>
+      <a class="nav-btn" href="guidelines.html">📋 Guidelines</a>
+      <a class="nav-btn" href="contact.html">📞 Contact Us</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h2>Welcome to AnajTrack</h2>
+      <p>Smart, transparent and convenient agricultural procurement management.</p>
+    </section>
+
+    <section class="dashboards">
+
+      <!-- FARMER DASHBOARD -->
+      <div class="dashboard farmer">
+        <div class="dashboard-head">
+          <div class="dashboard-icon">🌾</div>
+          <h3>Farmers</h3>
+          <p>Register, book your procurement slot, manage your queue and track payment status.</p>
+        </div>
+
+        <div class="options">
+          <a class="option" href="farmer-registration.html">
+            <div class="option-icon">👨‍🌾</div>
+            <strong>Farmer Registration</strong>
+            <small>New farmer? Register here</small>
+          </a>
+
+          <a class="option" href="farmer-login.html">
+            <div class="option-icon">🔐</div>
+            <strong>Farmer Login</strong>
+            <small>Already registered? Login</small>
+          </a>
+        </div>
+      </div>
+
+      <!-- OFFICER DASHBOARD -->
+      <div class="dashboard officer">
+        <div class="dashboard-head">
+          <div class="dashboard-icon">🏛️</div>
+          <h3>Officer Login</h3>
+          <p>Access procurement data, manage centres and monitor procurement operations.</p>
+        </div>
+
+        <div class="options">
+          <a class="option" href="adhikari-login.html">
+            <div class="option-icon">👨‍💼</div>
+            <strong>Government Adhikari</strong>
+            <small>Login for department officials</small>
+          </a>
+
+          <a class="option" href="pacs-login.html">
+            <div class="option-icon">🏢</div>
+            <strong>PACS Login</strong>
+            <small>Login for PACS / procurement centre</small>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="notice">
+      <strong>Smart Procurement:</strong> Book your slot in advance and reduce waiting time at procurement centres.
+    </div>
+  </main>
+
+  <footer>
+    <strong>AnajTrack</strong> &nbsp; | &nbsp; Smart Agricultural Procurement Platform<br>
+    Ministry / Department integration-ready portal &nbsp; • &nbsp; © 2026 AnajTrack
+  </footer>
+</body>
+</html>
