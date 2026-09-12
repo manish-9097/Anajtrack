@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Government Adhikari Login | AnajTrack</title>
+<title>Government Official | AnajTrack</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{
@@ -96,7 +96,7 @@
     <div class="icon">👨‍💼</div>
 
     <div class="title">
-      <h1>Government Adhikari Login</h1>
+      <h1>Government Official Login</h1>
       <p>Authorized government officials can access the AnajTrack procurement dashboard.</p>
     </div>
 
@@ -130,12 +130,12 @@
         >
       </div>
 
-      <button type="submit">🔐 Login</button>
+      <button type="button" onclick="openDashboard()">Login</button>
       <div id="status"></div>
     </form>
 
     <div class="security">
-      🔒 Government officer authentication should be connected to a secure HTTPS backend with role-based access control.
+       Government officer authentication should be connected to a secure HTTPS backend with role-based access control.
     </div>
   </section>
 </main>
@@ -145,34 +145,9 @@
 </footer>
 
 <script>
-const form = document.getElementById("loginForm");
-const statusBox = document.getElementById("status");
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  if (!form.checkValidity()) {
-    form.reportValidity();
-    return;
-  }
-
-  const phone = document.getElementById("phone").value.trim();
-
-  if (!/^[6-9][0-9]{9}$/.test(phone)) {
-    statusBox.style.display = "block";
-    statusBox.style.background = "#fff0f0";
-    statusBox.style.color = "#b42318";
-    statusBox.textContent = "Please enter a valid 10-digit Indian mobile number.";
-    return;
-  }
-
-  // Frontend prototype validation only.
-  statusBox.style.display = "block";
-  statusBox.style.background = "#eaf7ee";
-  statusBox.style.color = "#08763e";
-  statusBox.textContent =
-    "Login details validated. Connect the secure backend to authenticate the Adhikari ID.";
-});
+function openDashboard() {
+  window.location.href = "adhikaridashboard.html";
+}
 </script>
 </body>
 </html>
