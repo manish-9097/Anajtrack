@@ -3,310 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PACS Login | AnajTrack</title>
+<title>PACS Login - AnajTrack</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:Arial,Helvetica,sans-serif;
-    min-height:100vh;background:linear-gradient(135deg,#eef8f0,#f8fbf7);
-    color:#173b27;display:flex;flex-direction:column
-  }
-  header{
-    background:#07572f;color:#fff;padding:16px 5%;
-    display:flex;align-items:center;justify-content:space-between;
-    box-shadow:0 3px 14px rgba(0,0,0,.15)
-  }
-  .brand{font-size:30px;font-weight:800;letter-spacing:-1px}
-  .brand span{color:#f0a33b}
-  .back{
-    color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.35);
-    padding:9px 15px;border-radius:8px;font-weight:600
-  }
-  .back:hover{background:#fff;color:#07572f}
-  main{width:min(760px,92%);margin:40px auto 55px;flex:1}
-  .title{text-align:center;margin-bottom:24px}
-  .title h1{font-size:32px;color:#145c34}
-  .title p{margin-top:8px;color:#68776e;font-size:14px}
-  .card{
-    background:#fff;border-radius:20px;padding:30px;
-    box-shadow:0 12px 40px rgba(20,65,38,.13);
-    border:1px solid #d7e5d9;border-top:5px solid #c77b1b
-  }
-  .icon{
-    width:72px;height:72px;border-radius:50%;margin:0 auto 12px;
-    display:grid;place-items:center;background:#fff3df;font-size:37px
-  }
-  .section-title{
-    font-size:18px;color:#145c34;margin:5px 0 17px;
-    padding-bottom:9px;border-bottom:2px solid #e3eee5
-  }
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
-  .field{display:flex;flex-direction:column;gap:7px}
-  .full{grid-column:1/-1}
-  label{font-size:14px;font-weight:700;color:#274a35}
-  input,select{
-    width:100%;padding:13px 14px;border:1px solid #cbd9ce;
-    border-radius:9px;background:#fff;color:#243b2c;font-size:15px;outline:none
-  }
-  input:focus,select:focus{
-    border-color:#16834a;box-shadow:0 0 0 3px rgba(22,131,74,.10)
-  }
-  select:disabled{background:#f1f4f2;color:#87928b;cursor:not-allowed}
-  .hint{font-size:12px;color:#78847d;line-height:1.35}
-  button{
-    width:100%;margin-top:24px;border:0;border-radius:10px;padding:14px;
-    background:#08763e;color:#fff;font-size:16px;font-weight:800;
-    cursor:pointer;box-shadow:0 5px 15px rgba(8,118,62,.22)
-  }
-  button:hover{background:#075b30}
-  #status{
-    display:none;margin-top:15px;padding:11px;border-radius:8px;
-    text-align:center;font-size:13px;font-weight:700
-  }
-  .security{
-    margin-top:21px;padding:12px 14px;border-radius:9px;
-    background:#f4f8f5;border:1px solid #dfe9e1;
-    color:#617067;font-size:12px;line-height:1.5;text-align:center
-  }
-  footer{
-    background:#063e23;color:#dcebe1;padding:20px;text-align:center;
-    font-size:13px;line-height:1.6
-  }
-  @media(max-width:650px){
-    header{padding:13px 4%}.brand{font-size:25px}
-    .back{padding:8px 11px;font-size:13px}
-    main{margin:30px auto 40px}.card{padding:23px 18px}
-    .grid{grid-template-columns:1fr}.full{grid-column:auto}
-    .title h1{font-size:27px}
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;min-height:100vh;background:linear-gradient(135deg,#e8f5e9,#f1f8e9);display:flex;align-items:center;justify-content:center;padding:20px}
+.login-container{width:100%;max-width:520px;background:#fff;border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,.15);overflow:hidden}
+.header{background:#176b2c;color:#fff;text-align:center;padding:25px 20px}
+.header h1{font-size:28px;margin-bottom:8px}.header p{font-size:15px;opacity:.92}
+.form-section{padding:30px}.form-group{margin-bottom:17px}
+label{display:block;font-weight:bold;color:#333;margin-bottom:7px}
+input,select{width:100%;padding:13px;border:1px solid #bbb;border-radius:8px;font-size:15px;outline:none;background:#fff}
+input:focus,select:focus{border-color:#176b2c;box-shadow:0 0 5px rgba(23,107,44,.2)}
+.login-btn{width:100%;padding:14px;border:0;border-radius:9px;background:#176b2c;color:#fff;font-size:17px;font-weight:bold;cursor:pointer;margin-top:7px}
+.login-btn:hover{background:#0e5120}.home-btn{display:block;text-align:center;text-decoration:none;color:#176b2c;font-weight:bold;margin-top:18px}
+.status{display:none;margin-top:12px;padding:10px;border-radius:7px;background:#fff8e1;color:#795548;font-size:13px}
+.footer{text-align:center;background:#f5f5f5;padding:15px;color:#666;font-size:13px}
+@media(max-width:600px){.form-section{padding:22px}.header h1{font-size:24px}}
 </style>
 </head>
-
 <body>
-<header>
-  <div class="brand">Anaj<span>Track</span></div>
-  <a class="back" href="index.html">← Back to Home</a>
-</header>
-
-<main>
-  <div class="title">
-    <div class="icon">🏢</div>
-    <h1>PACS Login</h1>
-    <p>Authorized PACS / procurement centre login for AnajTrack.</p>
+<div class="login-container">
+  <div class="header">
+    <h1>🏪 PACS Login</h1>
+    <p>AnajTrack Procurement Management System</p>
   </div>
 
-  <section class="card">
-    <form id="loginForm" novalidate>
+  <div class="form-section">
+    <div class="form-group">
+      <label for="pacsId">PACS ID</label>
+      <input type="text" id="pacsId" placeholder="Enter PACS ID">
+    </div>
 
-      <div class="section-title">🔐 PACS Details</div>
-      <div class="grid">
-        <div class="field full">
-          <label for="pacsId">PACS ID *</label>
-          <input id="pacsId" name="pacsId" type="text"
-                 placeholder="Enter PACS ID" autocomplete="username" required>
-          <span class="hint">Enter the PACS ID provided to your procurement centre.</span>
-        </div>
+    <div class="form-group">
+      <label for="mobile">Registered Mobile Number</label>
+      <input type="tel" id="mobile" maxlength="10" placeholder="Enter 10 digit mobile number">
+    </div>
 
-        <div class="field full">
-          <label for="phone">Registered Mobile Number *</label>
-          <input id="phone" name="phone" type="tel" inputmode="numeric"
-                 maxlength="10" minlength="10" pattern="[6-9][0-9]{9}"
-                 placeholder="Enter 10-digit mobile number" autocomplete="tel" required>
-        </div>
-      </div>
+    <div class="form-group">
+      <label for="state">State / UT</label>
+      <select id="state"><option value="">Loading States...</option></select>
+    </div>
 
-      <div class="section-title" style="margin-top:28px;">📍 PACS Location</div>
-      <div class="grid">
-        <div class="field">
-          <label for="state">State / Union Territory *</label>
-          <select id="state" name="state" required>
-            <option value="">Loading States / UTs...</option>
-          </select>
-        </div>
+    <div class="form-group">
+      <label for="district">District</label>
+      <select id="district" disabled><option value="">Select District</option></select>
+    </div>
 
-        <div class="field">
-          <label for="district">District *</label>
-          <select id="district" name="district" required disabled>
-            <option value="">Select State first</option>
-          </select>
-        </div>
+    <div class="form-group">
+      <label for="block">Block / Sub-District</label>
+      <select id="block" disabled><option value="">Select Block</option></select>
+    </div>
 
-        <div class="field">
-          <label for="block">Block *</label>
-          <select id="block" name="block" required disabled>
-            <option value="">Select District first</option>
-          </select>
-        </div>
+    <div class="form-group">
+      <label for="panchayat">Gram Panchayat / Local Body</label>
+      <select id="panchayat" disabled><option value="">Select Gram Panchayat</option></select>
+    </div>
 
-        <div class="field">
-          <label for="panchayat">Gram Panchayat *</label>
-          <select id="panchayat" name="panchayat" required disabled>
-            <option value="">Select Block first</option>
-          </select>
-        </div>
-      </div>
+    <div id="status" class="status"></div>
 
-      <button type="submit">🔐 Login</button>
-      <div id="status"></div>
+    <button type="button" class="login-btn" onclick="openPacsDashboard()">🔐 Login</button>
+    <a href="index.html" class="home-btn">← Back to Home</a>
+  </div>
 
-      <div class="security">
-        🔒 Production authentication should use a secure HTTPS backend, role-based access control and server-side PACS verification.
-      </div>
-    </form>
-  </section>
-</main>
-
-<footer>
-  <strong>AnajTrack</strong> · Smart Agricultural Procurement Platform · © 2026
-</footer>
+  <div class="footer">© 2026 AnajTrack | Smart Procurement Management System</div>
+</div>
 
 <script>
-/*
-  Government of India Local Government Directory (LGD)
-  cascading hierarchy:
-  State → District → Block → Gram Panchayat
+const API="https://lgdirectory.gov.in/webservices/lgdws";
+const stateSelect=document.getElementById("state");
+const districtSelect=document.getElementById("district");
+const blockSelect=document.getElementById("block");
+const panchayatSelect=document.getElementById("panchayat");
+const statusBox=document.getElementById("status");
 
-  No API key is stored in this public HTML.
-*/
-const LGD_BASE = "https://lgdirectory.gov.in/webservices/lgdws";
-
-const state = document.getElementById("state");
-const district = document.getElementById("district");
-const block = document.getElementById("block");
-const panchayat = document.getElementById("panchayat");
-const form = document.getElementById("loginForm");
-const statusBox = document.getElementById("status");
-
-function setStatus(message, color="#315b40"){
-  statusBox.style.display="block";
-  statusBox.style.color=color;
-  statusBox.style.background=color==="#b42318" ? "#fff0f0" : "#eaf7ee";
-  statusBox.textContent=message;
+function setOptions(select,items,placeholder,valueKey,textKey){
+  select.innerHTML="";
+  const first=document.createElement("option");
+  first.value=""; first.textContent=placeholder; select.appendChild(first);
+  items.forEach(item=>{
+    const option=document.createElement("option");
+    option.value=item[valueKey] ?? "";
+    option.textContent=item[textKey] ?? "";
+    select.appendChild(option);
+  });
 }
+function showStatus(message){statusBox.textContent=message;statusBox.style.display="block"}
+function hideStatus(){statusBox.style.display="none"}
 
-function resetSelect(el, text){
-  el.innerHTML="";
-  const opt=document.createElement("option");
-  opt.value=""; opt.textContent=text;
-  el.appendChild(opt); el.disabled=true;
-}
-
-async function requestLGD(endpoint){
-  let response;
-  try{
-    response=await fetch(`${LGD_BASE}/${endpoint}`,{
-      method:"POST",
-      headers:{"Content-Type":"application/x-www-form-urlencoded"},
-      body:""
-    });
-  }catch(e){
-    response=await fetch(`${LGD_BASE}/${endpoint}`,{method:"GET"});
-  }
-  if(!response.ok) throw new Error("LGD HTTP "+response.status);
+async function getJSON(url){
+  const response=await fetch(url,{method:"GET",headers:{"Accept":"application/json"}});
+  if(!response.ok) throw new Error("Request failed: "+response.status);
   return await response.json();
 }
 
-function addOptions(el, items, valueKey, textKey, label){
-  resetSelect(el,"Select "+label);
-  items.sort((a,b)=>String(a[textKey]).localeCompare(String(b[textKey])));
-  items.forEach(item=>{
-    const opt=document.createElement("option");
-    opt.value=item[valueKey];
-    opt.textContent=item[textKey];
-    el.appendChild(opt);
-  });
-  el.disabled=items.length===0;
-}
-
 async function loadStates(){
-  state.innerHTML='<option value="">Loading States / UTs...</option>';
-  state.disabled=true;
   try{
-    const data=await requestLGD("stateList");
-    const items=(Array.isArray(data)?data:[])
-      .map(x=>({code:x.stateCode,name:x.stateNameEnglish}))
-      .filter(x=>x.code&&x.name);
-    addOptions(state,items,"code","name","State / UT");
-    if(!items.length) throw new Error("No states");
-    setStatus("Official LGD State / UT data loaded.","#08763e");
+    hideStatus();
+    const data=await getJSON(API+"/stateList");
+    const states=Array.isArray(data)?data:(data.data||data.states||[]);
+    setOptions(stateSelect,states,"Select State / UT","stateCode","stateNameEnglish");
   }catch(error){
-    resetSelect(state,"Unable to load States / UTs");
-    setStatus("Could not load official location data. Run this page through a web server such as VS Code Live Server and try again.","#b42318");
-    console.error(error);
+    stateSelect.innerHTML='<option value="">Unable to load states</option>';
+    showStatus("LGD location data could not be loaded. Use Live Server/local web server and check internet connection.");
   }
 }
 
-state.addEventListener("change",async()=>{
-  resetSelect(district,"Loading Districts...");
-  resetSelect(block,"Select District first");
-  resetSelect(panchayat,"Select Block first");
-  if(!state.value)return;
+stateSelect.addEventListener("change",async function(){
+  const stateCode=this.value;
+  districtSelect.disabled=true; blockSelect.disabled=true; panchayatSelect.disabled=true;
+  districtSelect.innerHTML='<option value="">Loading Districts...</option>';
+  blockSelect.innerHTML='<option value="">Select Block</option>';
+  panchayatSelect.innerHTML='<option value="">Select Gram Panchayat</option>';
+  if(!stateCode)return;
   try{
-    const data=await requestLGD("districtList?stateCode="+encodeURIComponent(state.value));
-    const items=(Array.isArray(data)?data:[])
-      .map(x=>({code:x.districtCode,name:x.districtNameEnglish}))
-      .filter(x=>x.code&&x.name);
-    addOptions(district,items,"code","name","District");
-    setStatus(items.length+" district(s) loaded from LGD.","#08763e");
+    const data=await getJSON(API+"/districtList?stateCode="+encodeURIComponent(stateCode));
+    const districts=Array.isArray(data)?data:(data.data||data.districts||[]);
+    setOptions(districtSelect,districts,"Select District","districtCode","districtNameEnglish");
+    districtSelect.disabled=false; hideStatus();
   }catch(error){
-    resetSelect(district,"Unable to load Districts");
-    setStatus("District data could not be loaded from LGD.","#b42318");
-    console.error(error);
+    districtSelect.innerHTML='<option value="">Unable to load districts</option>';
+    showStatus("District data could not be loaded.");
   }
 });
 
-district.addEventListener("change",async()=>{
-  resetSelect(block,"Loading Blocks...");
-  resetSelect(panchayat,"Select Block first");
-  if(!district.value)return;
+districtSelect.addEventListener("change",async function(){
+  const districtCode=this.value;
+  blockSelect.disabled=true; panchayatSelect.disabled=true;
+  blockSelect.innerHTML='<option value="">Loading Blocks...</option>';
+  panchayatSelect.innerHTML='<option value="">Select Gram Panchayat</option>';
+  if(!districtCode)return;
   try{
-    const data=await requestLGD("blockList?districtCode="+encodeURIComponent(district.value));
-    const items=(Array.isArray(data)?data:[])
-      .map(x=>({code:x.blockCode,name:x.blockNameEnglish}))
-      .filter(x=>x.code&&x.name);
-    addOptions(block,items,"code","name","Block");
-    setStatus(items.length+" block(s) loaded from LGD.","#08763e");
+    const data=await getJSON(API+"/blockList?districtCode="+encodeURIComponent(districtCode));
+    const blocks=Array.isArray(data)?data:(data.data||data.blocks||[]);
+    setOptions(blockSelect,blocks,"Select Block","blockCode","blockNameEnglish");
+    blockSelect.disabled=false; hideStatus();
   }catch(error){
-    resetSelect(block,"Unable to load Blocks");
-    setStatus("Block data could not be loaded from LGD.","#b42318");
-    console.error(error);
+    blockSelect.innerHTML='<option value="">Unable to load blocks</option>';
+    showStatus("Block data could not be loaded.");
   }
 });
 
-block.addEventListener("change",async()=>{
-  resetSelect(panchayat,"Loading Gram Panchayats...");
-  if(!block.value)return;
+blockSelect.addEventListener("change",async function(){
+  const blockCode=this.value;
+  panchayatSelect.disabled=true;
+  panchayatSelect.innerHTML='<option value="">Loading Gram Panchayats...</option>';
+  if(!blockCode)return;
   try{
-    const data=await requestLGD("getBlockwiseMappedGP?blockCode="+encodeURIComponent(block.value));
-    const items=(Array.isArray(data)?data:[])
-      .map(x=>({code:x.localBodyCode,name:x.localBodyNameEnglish}))
-      .filter(x=>x.code&&x.name);
-    addOptions(panchayat,items,"code","name","Gram Panchayat");
-    setStatus(items.length+" Gram Panchayat(s) loaded from LGD.","#08763e");
+    const data=await getJSON(API+"/getBlockwiseMappedGP?blockCode="+encodeURIComponent(blockCode));
+    const gps=Array.isArray(data)?data:(data.data||data.localBodies||data.gps||[]);
+    setOptions(panchayatSelect,gps,"Select Gram Panchayat","localBodyCode","localBodyNameEnglish");
+    panchayatSelect.disabled=false; hideStatus();
   }catch(error){
-    resetSelect(panchayat,"Unable to load Gram Panchayats");
-    setStatus("Panchayat data could not be loaded from LGD.","#b42318");
-    console.error(error);
+    panchayatSelect.innerHTML='<option value="">Unable to load Panchayats</option>';
+    showStatus("Gram Panchayat data could not be loaded.");
   }
 });
 
-form.addEventListener("submit",e=>{
-  e.preventDefault();
-  if(!form.checkValidity()){
-    form.reportValidity();
-    return;
-  }
-  const phone=document.getElementById("phone").value.trim();
-  if(!/^[6-9][0-9]{9}$/.test(phone)){
-    setStatus("Please enter a valid 10-digit Indian mobile number.","#b42318");
-    document.getElementById("phone").focus();
-    return;
-  }
-  setStatus(
-    "Login details validated. Connect the secure backend to authenticate the PACS ID and location.",
-    "#08763e"
-  );
-});
+// Direct login: no verification
+function openPacsDashboard(){
+  window.location.href="pacsdashboard.html";
+}
 
 loadStates();
 </script>
