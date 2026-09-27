@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Guidance - AnajTrack</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7fff7;
+            color: #222;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #087f23, #16a34a);
+            color: white;
+            padding: 12px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .logo-area h1 {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: white;
+            color: #087f23;
+        }
+
+        /* TOP IMAGE */
+        .top-banner {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 70, 20, 0.48);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .banner-overlay h2 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .banner-overlay p {
+            font-size: 18px;
+        }
+
+        /* MAIN */
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .guidance-section {
+            padding: 55px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #087f23;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-line {
+            width: 70px;
+            height: 4px;
+            background: #f59e0b;
+            margin: 0 auto 40px;
+            border-radius: 10px;
+        }
+
+        .intro {
+            max-width: 850px;
+            margin: 0 auto 45px;
+            text-align: center;
+            color: #555;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        /* STEPS */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.09);
+            border-left: 5px solid #16a34a;
+            transition: 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.14);
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #087f23;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step-card h3 {
+            color: #087f23;
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* IMPORTANT DOCUMENTS */
+        .documents {
+            background: #eaf8ed;
+            padding: 55px 0;
+            margin-top: 20px;
+        }
+
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .document-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .document-card .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .document-card h3 {
+            color: #087f23;
+            margin-bottom: 8px;
+        }
+
+        .document-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* DO & DON'T */
+        .tips {
+            padding: 55px 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .tip-box {
+            padding: 28px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .tip-box h3 {
+            margin-bottom: 15px;
+            font-size: 23px;
+        }
+
+        .do h3 {
+            color: #087f23;
+        }
+
+        .dont h3 {
+            color: #d62828;
+        }
+
+        .tip-box ul {
+            padding-left: 22px;
+        }
+
+        .tip-box li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* HELP BOX */
+        .help {
+            padding: 0 0 55px;
+        }
+
+        .help-box {
+            background: linear-gradient(135deg, #087f23, #16a34a);
+            color: white;
+            text-align: center;
+            padding: 40px 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .help-box h2 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .help-box p {
+            line-height: 1.7;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .help-button {
+            display: inline-block;
+            margin-top: 20px;
+            background: white;
+            color: #087f23;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .help-button:hover {
+            background: #f59e0b;
+            color: white;
+        }
+
+        /* BOTTOM IMAGE */
+        .bottom-image {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+        }
+
+        .bottom-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #075b1b;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #d9f7df;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin: 18px 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 7px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-area h1 {
+                font-size: 23px;
+            }
+
+            nav a {
+                font-size: 13px;
+                padding: 7px 9px;
+            }
+
+            .top-banner {
+                height: 220px;
+            }
+
+            .banner-overlay h2 {
+                font-size: 30px;
+            }
+
+            .banner-overlay p {
+                font-size: 15px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .document-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+
+            .bottom-image {
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo-area">
+            <img src="images/satyamevjayte.png" alt="Satyamev Jayate">
+            <h1>🌾 AnajTrack</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="procurement-centres.html">Procurement Centres</a>
+            <a href="guidance.html" class="active">Guidance</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+    </header>
+
+
+    <!-- TOP PNG -->
+    <section class="top-banner">
+
+        <img src="images/banner.png" alt="AnajTrack Guidance">
+
+        <div class="banner-overlay">
+            <div>
+                <h2>Farmer Guidance</h2>
+                <p>Know the process before bringing your crop to the procurement centre</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- INTRO -->
+    <section class="guidance-section">
+
+        <div class="container">
+
+            <h2 class="section-title">How AnajTrack Works</h2>
+            <div class="section-line"></div>
+
+            <p class="intro">
+                AnajTrack helps farmers understand and manage the grain
+                procurement process digitally. Follow these steps to
+                register, select your crop, receive a token and visit
+                the procurement centre at your scheduled time.
+            </p>
+
+
+            <!-- STEPS -->
+            <div class="steps">
+
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>👨‍🌾 Farmer Registration</h3>
+                    <p>
+                        Open the farmer registration page and enter the
+                        required personal and location details. Make sure
+                        the information entered is correct.
+                    </p>
+                </div>
+
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>🌾 Add Crop Details</h3>
+                    <p>
+                        Select the crop you want to bring for procurement
+                        and enter the approximate quantity in quintals.
+                    </p>
+                </div>
+
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>🏢 Select Procurement Centre</h3>
+                    <p>
+                        Select the appropriate procurement centre based
+                        on your location and the available procurement
+                        arrangements.
+                    </p>
+                </div>
+
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>🎟️ Receive Token</h3>
+                    <p>
+                        After the required details are submitted, the
+                        system can provide a token or scheduled slot
+                        for procurement.
+                    </p>
+                </div>
+
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3>📅 Check Date & Time</h3>
+                    <p>
+                        Check your token details carefully and visit the
+                        selected procurement centre according to the
+                        assigned date and time.
+                    </p>
+                </div>
+
+
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h3>✅ Verification at Centre</h3>
+                    <p>
+                        Show your required details and token at the
+                        procurement centre. Centre staff can verify
+                        the farmer and token information.
+                    </p>
+                </div>
+
+
+                <div class="step-card">
+                    <div class="step-number">7</div>
+                    <h3>⚖️ Crop Procurement</h3>
+                    <p>
+                        After verification, the crop can be received
+                        according to the applicable procurement process,
+                        quality requirements and approved rates.
+                    </p>
+                </div>
+
+
+                <div class="step-card">
+                    <div class="step-number">8</div>
+                    <h3>📄 Record & Status</h3>
+                    <p>
+                        Procurement information can be recorded digitally
+                        so that the farmer and authorized officials can
+                        maintain the relevant transaction records.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DOCUMENTS -->
+    <section class="documents">
+
+        <div class="container">
+
+            <h2 class="section-title">Keep Your Details Ready</h2>
+            <div class="section-line"></div>
+
+            <div class="document-grid">
+
+                <div class="document-card">
+                    <div class="icon">🪪</div>
+                    <h3>Identity Details</h3>
+                    <p>
+                        Keep the required identity information ready
+                        when completing registration.
+                    </p>
+                </div>
+
+                <div class="document-card">
+                    <div class="icon">📱</div>
+                    <h3>Mobile Number</h3>
+                    <p>
+                        Use an active mobile number for important
+                        communication related to your registration.
+                    </p>
+                </div>
+
+                <div class="document-card">
+                    <div class="icon">🌾</div>
+                    <h3>Crop Information</h3>
+                    <p>
+                        Keep your crop type and approximate quantity
+                        information ready.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DO AND DON'T -->
+    <section class="tips">
+
+        <div class="container">
+
+            <h2 class="section-title">Important Tips</h2>
+            <div class="section-line"></div>
+
+            <div class="tips-grid">
+
+                <div class="tip-box do">
+
+                    <h3>✔️ Do</h3>
+
+                    <ul>
+                        <li>Enter correct registration information.</li>
+                        <li>Check your token details carefully.</li>
+                        <li>Reach the procurement centre according to your slot.</li>
+                        <li>Keep your required documents/details available.</li>
+                        <li>Follow the instructions provided by the centre.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="tip-box dont">
+
+                    <h3>❌ Don't</h3>
+
+                    <ul>
+                        <li>Do not share confidential login information.</li>
+                        <li>Do not enter incorrect crop or quantity details.</li>
+                        <li>Do not ignore your assigned token date and time.</li>
+                        <li>Do not provide false information.</li>
+                        <li>Do not visit an unrelated procurement centre without confirmation.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HELP -->
+    <section class="help">
+
+        <div class="container">
+
+            <div class="help-box">
+
+                <h2>Need More Help?</h2>
+
+                <p>
+                    If you have any question regarding registration,
+                    procurement centres or the AnajTrack process,
+                    visit our contact page for assistance.
+                </p>
+
+                <a href="contact.html" class="help-button">
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM PNG -->
+    <section class="bottom-image">
+
+        <img src="images/farmer.png" alt="Farmer Agriculture">
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>🌾 AnajTrack</h2>
+
+        <p>
+            A digital platform for organized and transparent
+            agricultural grain procurement.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="index.html">Home</a> |
+            <a href="about.html">About</a> |
+            <a href="procurement-centres.html">Procurement Centres</a> |
+            <a href="guidance.html">Guidance</a> |
+            <a href="contact.html">Contact</a>
+
+        </div>
+
+        <p>
+            © 2026 AnajTrack. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>

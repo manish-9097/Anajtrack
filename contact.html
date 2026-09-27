@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us - AnajTrack</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7fff7;
+            color: #222;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #087f23, #16a34a);
+            color: white;
+            padding: 12px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .logo-area h1 {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: white;
+            color: #087f23;
+        }
+
+        /* TOP BANNER */
+        .top-banner {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 70, 20, 0.50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .banner-overlay h2 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .banner-overlay p {
+            font-size: 18px;
+        }
+
+        /* MAIN */
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .contact-section {
+            padding: 55px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #087f23;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-line {
+            width: 70px;
+            height: 4px;
+            background: #f59e0b;
+            margin: 0 auto 40px;
+            border-radius: 10px;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #555;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* CONTACT CARDS */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 50px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.09);
+            transition: 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .contact-icon {
+            font-size: 42px;
+            margin-bottom: 13px;
+        }
+
+        .contact-card h3 {
+            color: #087f23;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .contact-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .contact-card a {
+            color: #087f23;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* FORM AREA */
+        .form-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .form-info {
+            background: linear-gradient(135deg, #087f23, #16a34a);
+            color: white;
+            padding: 35px;
+            border-radius: 18px;
+        }
+
+        .form-info h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .form-info p {
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #e7f9ea;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+        }
+
+        .contact-form h2 {
+            color: #087f23;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #16a34a;
+            box-shadow: 0 0 0 3px rgba(22,163,74,0.10);
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            padding: 13px;
+            background: #087f23;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #f59e0b;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: #eaf8ed;
+            padding: 55px 0;
+            margin-top: 20px;
+        }
+
+        .faq {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .faq-question {
+            padding: 18px 20px;
+            color: #087f23;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 20px 18px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* BOTTOM IMAGE */
+        .bottom-image {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+        }
+
+        .bottom-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #075b1b;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #d9f7df;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin: 18px 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 7px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-area h1 {
+                font-size: 23px;
+            }
+
+            nav a {
+                font-size: 13px;
+                padding: 7px 9px;
+            }
+
+            .top-banner {
+                height: 220px;
+            }
+
+            .banner-overlay h2 {
+                font-size: 30px;
+            }
+
+            .banner-overlay p {
+                font-size: 15px;
+            }
+
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .form-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+
+            .bottom-image {
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo-area">
+            <img src="images/satyamevjayte.png" alt="Satyamev Jayate">
+            <h1>🌾 AnajTrack</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="procurement-centres.html">Procurement Centres</a>
+            <a href="guidance.html">Guidance</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+
+    </header>
+
+
+    <!-- TOP PNG -->
+    <section class="top-banner">
+
+        <img src="images/banner.png" alt="AnajTrack Contact">
+
+        <div class="banner-overlay">
+            <div>
+                <h2>Contact Us</h2>
+                <p>We are here to help farmers and procurement centres</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="contact-section">
+
+        <div class="container">
+
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="section-line"></div>
+
+            <p class="intro">
+                Have a question about AnajTrack, farmer registration,
+                tokens or procurement centres? Use the information below
+                or send us a message through the contact form.
+            </p>
+
+
+            <!-- CONTACT CARDS -->
+            <div class="contact-cards">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">📞</div>
+
+                    <h3>Helpline</h3>
+
+                    <p>
+                        Need assistance?<br>
+                        <a href="tel:+919999999999">
+                            +91 99999 99999
+                        </a>
+                    </p>
+
+                </div>
+
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">📧</div>
+
+                    <h3>Email</h3>
+
+                    <p>
+                        Send your query to<br>
+                        <a href="mailto:support@anajtrack.in">
+                            support@anajtrack.in
+                        </a>
+                    </p>
+
+                </div>
+
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">🏢</div>
+
+                    <h3>Support Centre</h3>
+
+                    <p>
+                        AnajTrack Support<br>
+                        India
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+            <div class="form-wrapper">
+
+                <div class="form-info">
+
+                    <h2>🌾 AnajTrack Support</h2>
+
+                    <p>
+                        Our platform is designed to make agricultural
+                        procurement easier and more organized.
+                        If you face any issue, send us your details
+                        and query.
+                    </p>
+
+                    <ul class="info-list">
+
+                        <li>👨‍🌾 Farmer Registration Support</li>
+
+                        <li>🎟️ Token & Slot Assistance</li>
+
+                        <li>🏢 Procurement Centre Information</li>
+
+                        <li>📱 Technical Assistance</li>
+
+                        <li>📋 General Queries</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="contact-form">
+
+                    <h2>Send Us a Message</h2>
+
+                    <form id="contactForm">
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Mobile Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter mobile number"
+                                maxlength="10"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter email address"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Query Type
+                            </label>
+
+                            <select id="category" required>
+
+                                <option value="">
+                                    Select query type
+                                </option>
+
+                                <option value="registration">
+                                    Farmer Registration
+                                </option>
+
+                                <option value="token">
+                                    Token / Slot
+                                </option>
+
+                                <option value="centre">
+                                    Procurement Centre
+                                </option>
+
+                                <option value="pacs">
+                                    PACS Related
+                                </option>
+
+                                <option value="technical">
+                                    Technical Problem
+                                </option>
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="message">
+                                Your Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                placeholder="Write your query here..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="submit-btn"
+                        >
+                            Submit Message
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FAQ -->
+    <section class="faq-section">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Frequently Asked Questions
+            </h2>
+
+            <div class="section-line"></div>
+
+            <div class="faq">
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+                        How can I register as a farmer?
+                        <span>+</span>
+                    </div>
+
+                    <div class="faq-answer">
+                        Go to the Farmer Registration option from
+                        the home page and enter the required details.
+                    </div>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+                        Where can I check my token?
+                        <span>+</span>
+                    </div>
+
+                    <div class="faq-answer">
+                        After farmer login, the assigned token and
+                        scheduled slot can be displayed in the
+                        farmer dashboard.
+                    </div>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+                        How can I find my procurement centre?
+                        <span>+</span>
+                    </div>
+
+                    <div class="faq-answer">
+                        Use the Procurement Centres page and select
+                        the relevant location to find available
+                        procurement centre information.
+                    </div>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+                        I am facing a technical problem. What should I do?
+                        <span>+</span>
+                    </div>
+
+                    <div class="faq-answer">
+                        You can submit your issue using the contact
+                        form above with your name, mobile number and
+                        a description of the problem.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM PNG -->
+    <section class="bottom-image">
+
+        <img src="images/farmer.png" alt="AnajTrack Farmer">
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>🌾 AnajTrack</h2>
+
+        <p>
+            A digital platform for organized and transparent
+            agricultural grain procurement.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="index.html">Home</a> |
+            <a href="about.html">About</a> |
+            <a href="procurement-centres.html">Procurement Centres</a> |
+            <a href="guidance.html">Guidance</a> |
+            <a href="contact.html">Contact</a>
+
+        </div>
+
+        <p>
+            © 2026 AnajTrack. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- FORM SCRIPT -->
+    <script>
+
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "Thank you for contacting AnajTrack! Your message has been received."
+            );
+
+            document.getElementById("contactForm").reset();
+
+        });
+
+    </script>
+
+</body>
+</html>

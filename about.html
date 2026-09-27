@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us - AnajTrack</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7fff7;
+            color: #222;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #087f23, #16a34a);
+            color: white;
+            padding: 12px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .logo-area h1 {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: white;
+            color: #087f23;
+        }
+
+        /* TOP IMAGE */
+        .top-banner {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 70, 20, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .banner-overlay h2 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .banner-overlay p {
+            font-size: 18px;
+        }
+
+        /* ABOUT */
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .about-section {
+            padding: 55px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #087f23;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-line {
+            width: 70px;
+            height: 4px;
+            background: #f59e0b;
+            margin: 0 auto 35px;
+            border-radius: 10px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .about-text h3 {
+            color: #087f23;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        /* FEATURES */
+        .features {
+            background: #eaf8ed;
+            padding: 55px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 28px 22px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.14);
+        }
+
+        .feature-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h3 {
+            color: #087f23;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* MISSION */
+        .mission {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .mission-box {
+            background: linear-gradient(135deg, #087f23, #16a34a);
+            color: white;
+            padding: 45px 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .mission-box h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .mission-box p {
+            max-width: 850px;
+            margin: auto;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        /* BOTTOM IMAGE */
+        .bottom-image {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .bottom-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #075b1b;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #d9f7df;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin: 18px 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-area h1 {
+                font-size: 23px;
+            }
+
+            nav a {
+                font-size: 13px;
+                padding: 7px 9px;
+            }
+
+            .top-banner {
+                height: 220px;
+            }
+
+            .banner-overlay h2 {
+                font-size: 30px;
+            }
+
+            .banner-overlay p {
+                font-size: 15px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+
+            .bottom-image {
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo-area">
+            <img src="images/satyamevjayte.png" alt="Satyamev Jayate">
+            <h1>🌾 AnajTrack</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="procurement-centres.html">Procurement Centres</a>
+            <a href="guidance.html">Guidance</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+    </header>
+
+
+    <!-- TOP PNG IMAGE -->
+    <section class="top-banner">
+
+        <img src="images/banner.png" alt="AnajTrack Farmer Banner">
+
+        <div class="banner-overlay">
+            <div>
+                <h2>About AnajTrack</h2>
+                <p>Connecting Farmers with a Smarter Grain Procurement System</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+
+        <div class="container">
+
+            <h2 class="section-title">Who We Are</h2>
+            <div class="section-line"></div>
+
+            <div class="about-content">
+
+                <div class="about-image">
+                    <img src="images/farmer.png" alt="Farmer">
+                </div>
+
+                <div class="about-text">
+
+                    <h3>🌾 What is AnajTrack?</h3>
+
+                    <p>
+                        AnajTrack is a digital platform designed to make
+                        agricultural grain procurement more organized,
+                        transparent and convenient for farmers.
+                    </p>
+
+                    <p>
+                        Through AnajTrack, farmers can register themselves,
+                        provide crop details, select the required procurement
+                        centre and receive a token or slot for bringing their
+                        produce to the centre.
+                    </p>
+
+                    <p>
+                        The system connects farmers, PACS procurement centres
+                        and government officials through a single digital
+                        platform.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <div class="container">
+
+            <h2 class="section-title">What AnajTrack Provides</h2>
+            <div class="section-line"></div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🌾</div>
+                    <h3>Farmer Registration</h3>
+                    <p>
+                        Farmers can register their details and provide
+                        information about the crop they want to sell.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎟️</div>
+                    <h3>Token System</h3>
+                    <p>
+                        Farmers can receive a token and scheduled slot
+                        for bringing their produce to the procurement centre.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>PACS Connection</h3>
+                    <p>
+                        Procurement centres can manage farmers, tokens,
+                        verification and procurement records.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌾</div>
+                    <h3>Crop Information</h3>
+                    <p>
+                        Crop type, quantity and other procurement-related
+                        information can be maintained digitally.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Digital Records</h3>
+                    <p>
+                        Procurement information can be organized for
+                        easier monitoring and reporting.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Better Communication</h3>
+                    <p>
+                        Important token, slot and procurement information
+                        can be communicated through the platform.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MISSION -->
+    <section class="mission">
+
+        <div class="container">
+
+            <div class="mission-box">
+
+                <h2>Our Mission</h2>
+
+                <p>
+                    AnajTrack aims to provide a simple digital system that
+                    helps organize the grain procurement journey from farmer
+                    registration to procurement. The goal is to reduce
+                    unnecessary waiting, improve record management and make
+                    the process easier for farmers and procurement centres.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM PNG IMAGE -->
+    <section class="bottom-image">
+
+        <img src="images/gehu.png" alt="Wheat Crop">
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>🌾 AnajTrack</h2>
+
+        <p>
+            A digital platform for organized and transparent
+            agricultural grain procurement.
+        </p>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            |
+            <a href="about.html">About</a>
+            |
+            <a href="procurement-centres.html">Procurement Centres</a>
+            |
+            <a href="guidance.html">Guidance</a>
+            |
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <p>
+            © 2026 AnajTrack. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>
