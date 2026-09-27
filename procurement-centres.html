@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Procurement Centres - AnajTrack</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7fff7;
+            color: #222;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(135deg, #087f23, #16a34a);
+            color: white;
+            padding: 12px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.20);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .logo-area h1 {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        nav {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 12px;
+            border-radius: 7px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: white;
+            color: #087f23;
+        }
+
+        /* ================= TOP IMAGE ================= */
+
+        .top-banner {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 70, 20, 0.50);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .banner-overlay h2 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .banner-overlay p {
+            font-size: 18px;
+        }
+
+        /* ================= COMMON ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section {
+            padding: 55px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #087f23;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-line {
+            width: 70px;
+            height: 4px;
+            background: #f59e0b;
+            margin: 0 auto 35px;
+            border-radius: 10px;
+        }
+
+        .intro {
+            max-width: 850px;
+            margin: 0 auto 35px;
+            text-align: center;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* ================= SEARCH BOX ================= */
+
+        .search-box {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #333;
+        }
+
+        .input-group select,
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            background: white;
+        }
+
+        .input-group select:focus,
+        .input-group input:focus {
+            border-color: #16a34a;
+            box-shadow: 0 0 0 3px rgba(22,163,74,0.10);
+        }
+
+        .search-button {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-search {
+            background: #087f23;
+            color: white;
+        }
+
+        .btn-search:hover {
+            background: #075b1b;
+        }
+
+        .btn-reset {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #d97706;
+        }
+
+        /* ================= RESULT INFO ================= */
+
+        .result-info {
+            margin: 30px 0 20px;
+            padding: 14px 18px;
+            background: #eaf8ed;
+            border-left: 5px solid #16a34a;
+            border-radius: 8px;
+            color: #075b1b;
+            font-weight: bold;
+        }
+
+        /* ================= CENTRE CARDS ================= */
+
+        .centre-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .centre-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.09);
+            transition: 0.3s;
+        }
+
+        .centre-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.14);
+        }
+
+        .centre-header {
+            background: linear-gradient(135deg, #087f23, #16a34a);
+            color: white;
+            padding: 20px;
+        }
+
+        .centre-header h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .centre-id {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .centre-body {
+            padding: 20px;
+        }
+
+        .centre-detail {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .centre-detail strong {
+            color: #333;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .open {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .closed {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .centre-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .centre-actions a {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .call-btn {
+            background: #087f23;
+            color: white;
+        }
+
+        .map-btn {
+            background: #f59e0b;
+            color: white;
+        }
+
+        /* ================= INFORMATION ================= */
+
+        .information {
+            background: #eaf8ed;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 28px 22px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .info-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .info-card h3 {
+            color: #087f23;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* ================= NO RESULT ================= */
+
+        .no-result {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: #666;
+        }
+
+        .no-result .icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        /* ================= BOTTOM IMAGE ================= */
+
+        .bottom-image {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+        }
+
+        .bottom-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #075b1b;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #d9f7df;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin: 18px 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 7px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .centre-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .logo-area h1 {
+                font-size: 23px;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 7px 8px;
+            }
+
+            .top-banner {
+                height: 220px;
+            }
+
+            .banner-overlay h2 {
+                font-size: 29px;
+            }
+
+            .banner-overlay p {
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .centre-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                padding: 20px;
+            }
+
+            .centre-actions {
+                flex-direction: column;
+            }
+
+            .bottom-image {
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo-area">
+
+            <img
+                src="satymevjayte.png"
+                alt="Satymev Jayte"
+            >
+
+            <h1>🌾 AnajTrack</h1>
+
+        </div>
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="about.html">About</a>
+
+            <a
+                href="procurement-centres.html"
+                class="active"
+            >
+                Procurement Centres
+            </a>
+
+            <a href="guidance.html">Guidance</a>
+
+            <a href="contact.html">Contact</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= TOP PNG ================= -->
+
+    <section class="top-banner">
+
+        <img
+            src="banner.png"
+            alt="AnajTrack Procurement Centre"
+        >
+
+        <div class="banner-overlay">
+
+            <div>
+
+                <h2>Procurement Centres</h2>
+
+                <p>
+                    Find a nearby grain procurement centre
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SEARCH ================= -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Find Procurement Centre
+            </h2>
+
+            <div class="section-line"></div>
+
+            <p class="intro">
+                Select your location to find the relevant
+                grain procurement centre.
+            </p>
+
+
+            <div class="search-box">
+
+                <div class="search-grid">
+
+                    <!-- STATE -->
+
+                    <div class="input-group">
+
+                        <label for="state">
+                            State
+                        </label>
+
+                        <select id="state">
+
+                            <option value="">
+                                Select State
+                            </option>
+
+                            <option value="bihar">
+                                Bihar
+                            </option>
+
+                            <option value="up">
+                                Uttar Pradesh
+                            </option>
+
+                            <option value="jharkhand">
+                                Jharkhand
+                            </option>
+
+                            <option value="west-bengal">
+                                West Bengal
+                            </option>
+
+                            <option value="mp">
+                                Madhya Pradesh
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DISTRICT -->
+
+                    <div class="input-group">
+
+                        <label for="district">
+                            District
+                        </label>
+
+                        <select id="district">
+
+                            <option value="">
+                                Select District
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- BLOCK -->
+
+                    <div class="input-group">
+
+                        <label for="block">
+                            Block
+                        </label>
+
+                        <select id="block">
+
+                            <option value="">
+                                Select Block
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PANCHAYAT -->
+
+                    <div class="input-group">
+
+                        <label for="panchayat">
+                            Panchayat
+                        </label>
+
+                        <select id="panchayat">
+
+                            <option value="">
+                                Select Panchayat
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH BY NAME -->
+
+                <div
+                    class="input-group"
+                    style="margin-top:18px;"
+                >
+
+                    <label for="centreSearch">
+                        Search Centre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="centreSearch"
+                        placeholder="Enter procurement centre name..."
+                    >
+
+                </div>
+
+
+                <div class="search-button">
+
+                    <button
+                        class="btn btn-search"
+                        onclick="searchCentres()"
+                    >
+                        🔍 Search Centres
+                    </button>
+
+                    <button
+                        class="btn btn-reset"
+                        onclick="resetSearch()"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CENTRES ================= -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Available Centres
+            </h2>
+
+            <div class="section-line"></div>
+
+
+            <div
+                class="result-info"
+                id="resultInfo"
+            >
+                Showing available procurement centres
+            </div>
+
+
+            <div
+                class="centre-grid"
+                id="centreGrid"
+            >
+
+                <!-- CENTRE 1 -->
+
+                <div
+                    class="centre-card"
+                    data-state="bihar"
+                    data-district="muzaffarpur"
+                    data-block="muraul"
+                    data-panchayat="muraul"
+                    data-name="Muraul PACS Procurement Centre"
+                >
+
+                    <div class="centre-header">
+
+                        <h3>
+                            Muraul PACS Procurement Centre
+                        </h3>
+
+                        <div class="centre-id">
+                            Centre ID: AT-BR-MUZ-001
+                        </div>
+
+                    </div>
+
+                    <div class="centre-body">
+
+                        <span class="status open">
+                            ● Procurement Active
+                        </span>
+
+                        <div class="centre-detail">
+                            📍
+                            <span>
+                                Muraul, Muzaffarpur, Bihar
+                            </span>
+                        </div>
+
+                        <div class="centre-detail">
+                            🏢
+                            <span>
+                                Muraul PACS
+                            </span>
+                        </div>
+
+                        <div class="centre-detail">
+                            🌾
+                            <span>
+                                Wheat, Rice & Maize
+                            </span>
+                        </div>
+
+                        <div class="centre-detail">
+                            🕐
+                            <span>
+                                09:00 AM - 05:00 PM
+                            </span>
+                        </div>
+
+                        <div class="centre-actions">
+
+                            <a
+                                href="tel:+919999999999"
+                                class="call-btn"
+                            >
+                                📞 Call
+                            </a>
+
+                            <a
+                                href="#"
+                                class="map-btn"
+                                onclick="showMap(event)"
+                            >
+                                📍 Location
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CENTRE 2 -->
+
+                <div
+                    class="centre-card"
+                    data-state="bihar"
+                    data-district="muzaffarpur"
+                    data-block="kanti"
+                    data-panchayat="kanti"
+                    data-name="Kanti PACS Procurement Centre"
+                >
+
+                    <div class="centre-header">
+
+                        <h3>
+                            Kanti PACS Procurement Centre
+                        </h3>
+
+                        <div class="centre-id">
+                            Centre ID: AT-BR-MUZ-002
+                        </div>
+
+                    </div>
+
+                    <div class="centre-body">
+
+                        <span class="status open">
+     
